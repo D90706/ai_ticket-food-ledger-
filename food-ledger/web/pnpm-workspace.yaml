@@ -1,0 +1,4 @@
+# pnpm 11 默认在 run 前校验依赖，校验不过就拒绝执行（ERR_PNPM_IGNORED_BUILDS）。
+# 这两条把它关掉：本项目的 esbuild 二进制由平台包提供，安装脚本没跑也能构建。
+verifyDepsBeforeRun: false
+onlyBuiltDependencies: []

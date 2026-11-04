@@ -1,0 +1,836 @@
+{
+  "model_requested": "deepseek-chat",
+  "current_date": "2026-10-20",
+  "schemas": {
+    "cs_after_sale": {
+      "name": "电商售后工单",
+      "role": "你是服装店的售后助手。语气克制，不承诺赔付、不承诺到货时间。",
+      "knowledge": "【退换货政策】签收 7 天内可无理由退换，商品需不影响二次销售。吊牌已剪、已洗涤、已穿着外出的不支持无理由退换。质量问题由卖家承担往返运费；非质量问题由买家承担。【尺码表】S 适合身高 155-165 / M 适合 165-170 / L 适合 170-178",
+      "decision_options": [
+        "批准换货",
+        "批准退货",
+        "拒绝",
+        "要求补证",
+        "转售后专岗"
+      ],
+      "fields": [
+        {
+          "key": "order_id",
+          "label": "订单号",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "reason",
+          "label": "原因",
+          "type": "enum",
+          "required": true,
+          "options": [
+            "尺码不合适",
+            "质量问题",
+            "发错货",
+            "其他"
+          ]
+        },
+        {
+          "key": "worn",
+          "label": "是否已穿着或洗涤",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "key": "size_wanted",
+          "label": "希望换成的尺码",
+          "type": "text",
+          "required": false
+        },
+        {
+          "key": "evidence",
+          "label": "商品问题照片",
+          "type": "image",
+          "required": false
+        }
+      ]
+    },
+    "it_repair": {
+      "name": "IT设备报修工单",
+      "role": "你是公司 IT 服务台的接单助手。只做信息整理，不判断责任。",
+      "knowledge": "【处理流程】硬件故障转技术支持；账号权限问题转信息科；网络问题先远程排查再决定是否上门。影响面为「全公司」的事件需 30 分钟内响应。",
+      "decision_options": [
+        "指派技术支持",
+        "远程处理",
+        "上门维修",
+        "更换设备",
+        "拒绝"
+      ],
+      "fields": [
+        {
+          "key": "device_no",
+          "label": "设备编号",
+          "type": "text",
+          "required": true
+        },
+        {
+          "key": "fault_type",
+          "label": "故障类型",
+          "type": "enum",
+          "required": true,
+          "options": [
+            "硬件故障",
+            "软件故障",
+            "网络问题",
+            "账号权限",
+            "其他"
+          ]
+        },
+        {
+          "key": "impact_scope",
+          "label": "影响范围",
+          "type": "enum",
+          "required": true,
+          "options": [
+            "仅本人",
+            "整个部门",
+            "全公司"
+          ]
+        },
+        {
+          "key": "urgent",
+          "label": "是否影响当前业务",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "key": "first_seen",
+          "label": "问题最早出现日期",
+          "type": "date",
+          "required": false
+        },
+        {
+          "key": "screenshot",
+          "label": "报错截图",
+          "type": "image",
+          "required": false
+        }
+      ]
+    }
+  },
+  "results": [
+    {
+      "case": "A1",
+      "schema": "cs_after_sale",
+      "mode": "natural",
+      "raw": {
+        "content": "{\n  \"values\": {\n    \"order_id\": \"20261008XXXX\",\n    \"reason\": \"尺码不合适\",\n    \"worn\": false,\n    \"size_wanted\": \"S\",\n    \"evidence\": null\n  },\n  \"missing_slots\": [\n    \"evidence\"\n  ],\n  \"confidence\": 0.9,\n  \"decision_suggestion\": \"批准换货\"\n}",
+        "model_returned": "deepseek-flash",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 695,
+          "completion_tokens": 84,
+          "total_tokens": 779,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 695
+        },
+        "latency_s": 0.98
+      },
+      "analysis": {
+        "parsed": true,
+        "fenced": false,
+        "json_error": null,
+        "null_in_values": [
+          "evidence"
+        ],
+        "absent_keys": [],
+        "missing_slots": [
+          "evidence"
+        ],
+        "missing_required": [],
+        "consistent_with_nulls": true,
+        "enum_out_of_range": [],
+        "type_mismatch": [],
+        "confidence": 0.9,
+        "decision_suggestion": "批准换货"
+      }
+    },
+    {
+      "case": "A1",
+      "schema": "cs_after_sale",
+      "mode": "jsonmode",
+      "raw": {
+        "content": "{\"values\":{\"order_id\":\"20261008XXXX\",\"reason\":\"尺码不合适\",\"worn\":false,\"size_wanted\":\"S\",\"evidence\":null},\"missing_slots\":[\"evidence\"],\"confidence\":0.9,\"decision_suggestion\":\"批准换货\"}",
+        "model_returned": "deepseek-flash",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 717,
+          "completion_tokens": 55,
+          "total_tokens": 772,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 205
+        },
+        "latency_s": 0.7
+      },
+      "analysis": {
+        "parsed": true,
+        "fenced": false,
+        "json_error": null,
+        "null_in_values": [
+          "evidence"
+        ],
+        "absent_keys": [],
+        "missing_slots": [
+          "evidence"
+        ],
+        "missing_required": [],
+        "consistent_with_nulls": true,
+        "enum_out_of_range": [],
+        "type_mismatch": [],
+        "confidence": 0.9,
+        "decision_suggestion": "批准换货"
+      }
+    },
+    {
+      "case": "A2",
+      "schema": "cs_after_sale",
+      "mode": "natural",
+      "raw": {
+        "content": "{\n  \"values\": {\n    \"order_id\": null,\n    \"reason\": null,\n    \"worn\": null,\n    \"size_wanted\": null,\n    \"evidence\": null\n  },\n  \"missing_slots\": [\n    \"order_id\",\n    \"reason\",\n    \"worn\",\n    \"size_wanted\",\n    \"evidence\"\n  ],\n  \"confidence\": 0.2,\n  \"decision_suggestion\": null\n}",
+        "model_returned": "deepseek-flash",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 660,
+          "completion_tokens": 93,
+          "total_tokens": 753,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 148
+        },
+        "latency_s": 0.89
+      },
+      "analysis": {
+        "parsed": true,
+        "fenced": false,
+        "json_error": null,
+        "null_in_values": [
+          "evidence",
+          "order_id",
+          "reason",
+          "size_wanted",
+          "worn"
+        ],
+        "absent_keys": [],
+        "missing_slots": [
+          "order_id",
+          "reason",
+          "worn",
+          "size_wanted",
+          "evidence"
+        ],
+        "missing_required": [
+          "order_id",
+          "reason"
+        ],
+        "consistent_with_nulls": true,
+        "enum_out_of_range": [],
+        "type_mismatch": [],
+        "confidence": 0.2,
+        "decision_suggestion": null
+      }
+    },
+    {
+      "case": "A2",
+      "schema": "cs_after_sale",
+      "mode": "jsonmode",
+      "raw": {
+        "content": "{\"values\":{\"order_id\":null,\"reason\":\"质量问题\",\"worn\":null,\"size_wanted\":null,\"evidence\":null},\"missing_slots\":[\"order_id\",\"worn\",\"size_wanted\",\"evidence\"],\"confidence\":0.4,\"decision_suggestion\":null}",
+        "model_returned": "deepseek-flash",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 682,
+          "completion_tokens": 58,
+          "total_tokens": 740,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 170
+        },
+        "latency_s": 0.77
+      },
+      "analysis": {
+        "parsed": true,
+        "fenced": false,
+        "json_error": null,
+        "null_in_values": [
+          "evidence",
+          "order_id",
+          "size_wanted",
+          "worn"
+        ],
+        "absent_keys": [],
+        "missing_slots": [
+          "order_id",
+          "worn",
+          "size_wanted",
+          "evidence"
+        ],
+        "missing_required": [
+          "order_id"
+        ],
+        "consistent_with_nulls": true,
+        "enum_out_of_range": [],
+        "type_mismatch": [],
+        "confidence": 0.4,
+        "decision_suggestion": null
+      }
+    },
+    {
+      "case": "A3",
+      "schema": "cs_after_sale",
+      "mode": "natural",
+      "raw": {
+        "content": "{\n  \"values\": {\n    \"order_id\": \"20261015ABC123\",\n    \"reason\": \"质量问题\",\n    \"worn\": null,\n    \"size_wanted\": null,\n    \"evidence\": null\n  },\n  \"missing_slots\": [\n    \"worn\",\n    \"size_wanted\",\n    \"evidence\"\n  ],\n  \"confidence\": 0.55,\n  \"decision_suggestion\": null\n}",
+        "model_returned": "deepseek-flash",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 689,
+          "completion_tokens": 90,
+          "total_tokens": 779,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 177
+        },
+        "latency_s": 1.08
+      },
+      "analysis": {
+        "parsed": true,
+        "fenced": false,
+        "json_error": null,
+        "null_in_values": [
+          "evidence",
+          "size_wanted",
+          "worn"
+        ],
+        "absent_keys": [],
+        "missing_slots": [
+          "worn",
+          "size_wanted",
+          "evidence"
+        ],
+        "missing_required": [],
+        "consistent_with_nulls": true,
+        "enum_out_of_range": [],
+        "type_mismatch": [],
+        "confidence": 0.55,
+        "decision_suggestion": null
+      }
+    },
+    {
+      "case": "A3",
+      "schema": "cs_after_sale",
+      "mode": "jsonmode",
+      "raw": {
+        "content": "{\"values\":{\"order_id\":\"20261015ABC123\",\"reason\":\"质量问题\",\"worn\":null,\"size_wanted\":null,\"evidence\":null},\"missing_slots\":[\"worn\",\"size_wanted\",\"evidence\"],\"confidence\":0.75,\"decision_suggestion\":\"要求补证\"}",
+        "model_returned": "deepseek-flash",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 711,
+          "completion_tokens": 61,
+          "total_tokens": 772,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 199
+        },
+        "latency_s": 0.74
+      },
+      "analysis": {
+        "parsed": true,
+        "fenced": false,
+        "json_error": null,
+        "null_in_values": [
+          "evidence",
+          "size_wanted",
+          "worn"
+        ],
+        "absent_keys": [],
+        "missing_slots": [
+          "worn",
+          "size_wanted",
+          "evidence"
+        ],
+        "missing_required": [],
+        "consistent_with_nulls": true,
+        "enum_out_of_range": [],
+        "type_mismatch": [],
+        "confidence": 0.75,
+        "decision_suggestion": "要求补证"
+      }
+    },
+    {
+      "case": "A4",
+      "schema": "cs_after_sale",
+      "mode": "natural",
+      "raw": {
+        "content": "{\n  \"values\": {\n    \"order_id\": \"20261001XYZ\",\n    \"reason\": \"质量问题\",\n    \"worn\": null,\n    \"size_wanted\": null,\n    \"evidence\": null\n  },\n  \"missing_slots\": [\n    \"worn\",\n    \"evidence\"\n  ],\n  \"confidence\": 0.55,\n  \"decision_suggestion\": null\n}",
+        "model_returned": "deepseek-flash",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 686,
+          "completion_tokens": 83,
+          "total_tokens": 769,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 174
+        },
+        "latency_s": 1.11
+      },
+      "analysis": {
+        "parsed": true,
+        "fenced": false,
+        "json_error": null,
+        "null_in_values": [
+          "evidence",
+          "size_wanted",
+          "worn"
+        ],
+        "absent_keys": [],
+        "missing_slots": [
+          "worn",
+          "evidence"
+        ],
+        "missing_required": [],
+        "consistent_with_nulls": false,
+        "enum_out_of_range": [],
+        "type_mismatch": [],
+        "confidence": 0.55,
+        "decision_suggestion": null
+      }
+    },
+    {
+      "case": "A4",
+      "schema": "cs_after_sale",
+      "mode": "jsonmode",
+      "raw": {
+        "content": "{\"values\":{\"order_id\":\"20261001XYZ\",\"reason\":\"质量问题\",\"worn\":null,\"size_wanted\":null,\"evidence\":null},\"missing_slots\":[\"worn\",\"size_wanted\",\"evidence\"],\"confidence\":0.55,\"decision_suggestion\":null}",
+        "model_returned": "deepseek-flash",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 708,
+          "completion_tokens": 58,
+          "total_tokens": 766,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 196
+        },
+        "latency_s": 0.63
+      },
+      "analysis": {
+        "parsed": true,
+        "fenced": false,
+        "json_error": null,
+        "null_in_values": [
+          "evidence",
+          "size_wanted",
+          "worn"
+        ],
+        "absent_keys": [],
+        "missing_slots": [
+          "worn",
+          "size_wanted",
+          "evidence"
+        ],
+        "missing_required": [],
+        "consistent_with_nulls": true,
+        "enum_out_of_range": [],
+        "type_mismatch": [],
+        "confidence": 0.55,
+        "decision_suggestion": null
+      }
+    },
+    {
+      "case": "B1",
+      "schema": "it_repair",
+      "mode": "natural",
+      "raw": {
+        "content": "{\n  \"values\": {\n    \"device_no\": \"PC-2031\",\n    \"fault_type\": \"硬件故障\",\n    \"impact_scope\": \"整个部门\",\n    \"urgent\": true,\n    \"first_seen\": \"2026-10-20\",\n    \"screenshot\": null\n  },\n  \"missing_slots\": [\n    \"screenshot\"\n  ],\n  \"confidence\": 0.9,\n  \"decision_suggestion\": \"指派技术支持\"\n}",
+        "model_returned": "deepseek-flash",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 688,
+          "completion_tokens": 101,
+          "total_tokens": 789,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 688
+        },
+        "latency_s": 1.1
+      },
+      "analysis": {
+        "parsed": true,
+        "fenced": false,
+        "json_error": null,
+        "null_in_values": [
+          "screenshot"
+        ],
+        "absent_keys": [],
+        "missing_slots": [
+          "screenshot"
+        ],
+        "missing_required": [],
+        "consistent_with_nulls": true,
+        "enum_out_of_range": [],
+        "type_mismatch": [],
+        "confidence": 0.9,
+        "decision_suggestion": "指派技术支持"
+      }
+    },
+    {
+      "case": "B1",
+      "schema": "it_repair",
+      "mode": "jsonmode",
+      "raw": {
+        "content": "{\"values\":{\"device_no\":\"PC-2031\",\"fault_type\":\"硬件故障\",\"impact_scope\":\"整个部门\",\"urgent\":true,\"first_seen\":\"2026-10-20\",\"screenshot\":null},\"missing_slots\":[\"screenshot\"],\"confidence\":0.9,\"decision_suggestion\":\"指派技术支持\"}",
+        "model_returned": "deepseek-flash",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 710,
+          "completion_tokens": 69,
+          "total_tokens": 779,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 198
+        },
+        "latency_s": 0.88
+      },
+      "analysis": {
+        "parsed": true,
+        "fenced": false,
+        "json_error": null,
+        "null_in_values": [
+          "screenshot"
+        ],
+        "absent_keys": [],
+        "missing_slots": [
+          "screenshot"
+        ],
+        "missing_required": [],
+        "consistent_with_nulls": true,
+        "enum_out_of_range": [],
+        "type_mismatch": [],
+        "confidence": 0.9,
+        "decision_suggestion": "指派技术支持"
+      }
+    },
+    {
+      "case": "B2",
+      "schema": "it_repair",
+      "mode": "natural",
+      "raw": {
+        "content": "{\n  \"values\": {\n    \"device_no\": null,\n    \"fault_type\": \"账号权限\",\n    \"impact_scope\": null,\n    \"urgent\": null,\n    \"first_seen\": null,\n    \"screenshot\": null\n  },\n  \"missing_slots\": [\n    \"device_no\",\n    \"impact_scope\",\n    \"urgent\",\n    \"first_seen\",\n    \"screenshot\"\n  ],\n  \"confidence\": 0.7,\n  \"decision_suggestion\": null\n}",
+        "model_returned": "deepseek-flash",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 668,
+          "completion_tokens": 109,
+          "total_tokens": 777,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 156
+        },
+        "latency_s": 1.15
+      },
+      "analysis": {
+        "parsed": true,
+        "fenced": false,
+        "json_error": null,
+        "null_in_values": [
+          "device_no",
+          "first_seen",
+          "impact_scope",
+          "screenshot",
+          "urgent"
+        ],
+        "absent_keys": [],
+        "missing_slots": [
+          "device_no",
+          "impact_scope",
+          "urgent",
+          "first_seen",
+          "screenshot"
+        ],
+        "missing_required": [
+          "device_no",
+          "impact_scope"
+        ],
+        "consistent_with_nulls": true,
+        "enum_out_of_range": [],
+        "type_mismatch": [],
+        "confidence": 0.7,
+        "decision_suggestion": null
+      }
+    },
+    {
+      "case": "B2",
+      "schema": "it_repair",
+      "mode": "jsonmode",
+      "raw": {
+        "content": "{\"values\":{\"device_no\":null,\"fault_type\":\"账号权限\",\"impact_scope\":null,\"urgent\":null,\"first_seen\":null,\"screenshot\":null},\"missing_slots\":[\"device_no\",\"impact_scope\",\"urgent\",\"first_seen\",\"screenshot\"],\"confidence\":0.7,\"decision_suggestion\":null}",
+        "model_returned": "deepseek-flash",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 690,
+          "completion_tokens": 73,
+          "total_tokens": 763,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 178
+        },
+        "latency_s": 1.1
+      },
+      "analysis": {
+        "parsed": true,
+        "fenced": false,
+        "json_error": null,
+        "null_in_values": [
+          "device_no",
+          "first_seen",
+          "impact_scope",
+          "screenshot",
+          "urgent"
+        ],
+        "absent_keys": [],
+        "missing_slots": [
+          "device_no",
+          "impact_scope",
+          "urgent",
+          "first_seen",
+          "screenshot"
+        ],
+        "missing_required": [
+          "device_no",
+          "impact_scope"
+        ],
+        "consistent_with_nulls": true,
+        "enum_out_of_range": [],
+        "type_mismatch": [],
+        "confidence": 0.7,
+        "decision_suggestion": null
+      }
+    },
+    {
+      "case": "B3",
+      "schema": "it_repair",
+      "mode": "natural",
+      "raw": {
+        "content": "{\n  \"values\": {\n    \"device_no\": null,\n    \"fault_type\": \"网络问题\",\n    \"impact_scope\": \"整个部门\",\n    \"urgent\": null,\n    \"first_seen\": \"2026-10-20\",\n    \"screenshot\": null\n  },\n  \"missing_slots\": [\n    \"device_no\",\n    \"urgent\",\n    \"screenshot\"\n  ],\n  \"confidence\": 0.75,\n  \"decision_suggestion\": \"远程处理\"\n}",
+        "model_returned": "deepseek-flash",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 677,
+          "completion_tokens": 107,
+          "total_tokens": 784,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 165
+        },
+        "latency_s": 0.93
+      },
+      "analysis": {
+        "parsed": true,
+        "fenced": false,
+        "json_error": null,
+        "null_in_values": [
+          "device_no",
+          "screenshot",
+          "urgent"
+        ],
+        "absent_keys": [],
+        "missing_slots": [
+          "device_no",
+          "urgent",
+          "screenshot"
+        ],
+        "missing_required": [
+          "device_no"
+        ],
+        "consistent_with_nulls": true,
+        "enum_out_of_range": [],
+        "type_mismatch": [],
+        "confidence": 0.75,
+        "decision_suggestion": "远程处理"
+      }
+    },
+    {
+      "case": "B3",
+      "schema": "it_repair",
+      "mode": "jsonmode",
+      "raw": {
+        "content": "{\"values\":{\"device_no\":null,\"fault_type\":\"网络问题\",\"impact_scope\":\"整个部门\",\"urgent\":null,\"first_seen\":null,\"screenshot\":null},\"missing_slots\":[\"device_no\",\"urgent\",\"first_seen\",\"screenshot\"],\"confidence\":0.75,\"decision_suggestion\":\"远程处理\"}",
+        "model_returned": "deepseek-flash",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 699,
+          "completion_tokens": 71,
+          "total_tokens": 770,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 187
+        },
+        "latency_s": 1.25
+      },
+      "analysis": {
+        "parsed": true,
+        "fenced": false,
+        "json_error": null,
+        "null_in_values": [
+          "device_no",
+          "first_seen",
+          "screenshot",
+          "urgent"
+        ],
+        "absent_keys": [],
+        "missing_slots": [
+          "device_no",
+          "urgent",
+          "first_seen",
+          "screenshot"
+        ],
+        "missing_required": [
+          "device_no"
+        ],
+        "consistent_with_nulls": true,
+        "enum_out_of_range": [],
+        "type_mismatch": [],
+        "confidence": 0.75,
+        "decision_suggestion": "远程处理"
+      }
+    },
+    {
+      "case": "B4",
+      "schema": "it_repair",
+      "mode": "natural",
+      "raw": {
+        "content": "{\n  \"values\": {\n    \"device_no\": null,\n    \"fault_type\": \"硬件故障\",\n    \"impact_scope\": null,\n    \"urgent\": null,\n    \"first_seen\": null,\n    \"screenshot\": null\n  },\n  \"missing_slots\": [\n    \"device_no\",\n    \"impact_scope\",\n    \"urgent\",\n    \"first_seen\",\n    \"screenshot\"\n  ],\n  \"confidence\": 0.55,\n  \"decision_suggestion\": null\n}",
+        "model_returned": "deepseek-flash",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 670,
+          "completion_tokens": 109,
+          "total_tokens": 779,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 158
+        },
+        "latency_s": 1.07
+      },
+      "analysis": {
+        "parsed": true,
+        "fenced": false,
+        "json_error": null,
+        "null_in_values": [
+          "device_no",
+          "first_seen",
+          "impact_scope",
+          "screenshot",
+          "urgent"
+        ],
+        "absent_keys": [],
+        "missing_slots": [
+          "device_no",
+          "impact_scope",
+          "urgent",
+          "first_seen",
+          "screenshot"
+        ],
+        "missing_required": [
+          "device_no",
+          "impact_scope"
+        ],
+        "consistent_with_nulls": true,
+        "enum_out_of_range": [],
+        "type_mismatch": [],
+        "confidence": 0.55,
+        "decision_suggestion": null
+      }
+    },
+    {
+      "case": "B4",
+      "schema": "it_repair",
+      "mode": "jsonmode",
+      "raw": {
+        "content": "{\"values\":{\"device_no\":null,\"fault_type\":\"硬件故障\",\"impact_scope\":null,\"urgent\":null,\"first_seen\":null,\"screenshot\":null},\"missing_slots\":[\"device_no\",\"impact_scope\",\"urgent\",\"first_seen\",\"screenshot\"],\"confidence\":0.5,\"decision_suggestion\":null}",
+        "model_returned": "deepseek-flash",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 692,
+          "completion_tokens": 73,
+          "total_tokens": 765,
+          "prompt_tokens_details": {
+            "cached_tokens": 512
+          },
+          "prompt_cache_hit_tokens": 512,
+          "prompt_cache_miss_tokens": 180
+        },
+        "latency_s": 1.3
+      },
+      "analysis": {
+        "parsed": true,
+        "fenced": false,
+        "json_error": null,
+        "null_in_values": [
+          "device_no",
+          "first_seen",
+          "impact_scope",
+          "screenshot",
+          "urgent"
+        ],
+        "absent_keys": [],
+        "missing_slots": [
+          "device_no",
+          "impact_scope",
+          "urgent",
+          "first_seen",
+          "screenshot"
+        ],
+        "missing_required": [
+          "device_no",
+          "impact_scope"
+        ],
+        "consistent_with_nulls": true,
+        "enum_out_of_range": [],
+        "type_mismatch": [],
+        "confidence": 0.5,
+        "decision_suggestion": null
+      }
+    }
+  ]
+}

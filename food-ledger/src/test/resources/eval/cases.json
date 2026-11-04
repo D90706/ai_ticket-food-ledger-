@@ -1,0 +1,200 @@
+[
+  {
+    "id": "E01",
+    "note": "信息齐全，一项不缺（基准样例）",
+    "dialogue": ["10月27日从城南肉联厂进了20斤冷鲜猪肉，单价28块5，规格散装，生产日期10月26日，批号P20261026-3，冷藏保质3天，地址城南大道88号，电话13800001111，检疫证明2026-A-1234"],
+    "expect": {
+      "ingredient_name": "冷鲜猪肉",
+      "spec": "散装",
+      "quantity": 20,
+      "unit": "斤",
+      "batch_no": "P20261026-3",
+      "supplier_name": "城南肉联厂",
+      "supplier_phone": "13800001111",
+      "certificate": "2026-A-1234"
+    }
+  },
+  {
+    "id": "E02",
+    "note": "散装无批号：按模板约定用生产日期作批次标识",
+    "dialogue": ["今天上午绿源蔬菜合作社送来50斤土豆，散装，没有批号，生产日期今天，保质期7天，地址城北农贸批发市场，电话13900002222，合格证SC2026-88"],
+    "expect": {
+      "ingredient_name": "土豆",
+      "spec": "散装",
+      "quantity": 50,
+      "unit": "斤",
+      "batch_no": "2026-10-28",
+      "supplier_name": "绿源蔬菜合作社",
+      "certificate": "SC2026-88"
+    }
+  },
+  {
+    "id": "E03",
+    "note": "极简口语：只说货和数量，其余一律应为空",
+    "dialogue": ["老张送了箱土豆"],
+    "expect": {
+      "ingredient_name": "土豆",
+      "supplier_name": "老张",
+      "quantity": null,
+      "spec": null,
+      "batch_no": null,
+      "certificate": null
+    }
+  },
+  {
+    "id": "E04",
+    "note": "数字陷阱：中文数量与单位分离",
+    "dialogue": ["昨天从李记粮油进了两箱非转基因大豆油，每箱20升，单价180块，生产日期2026-10-10，批号DY20261010，保质期18个月，联系电话13700003333，检验报告JY-2026-0912"],
+    "expect": {
+      "ingredient_name": "非转基因大豆油",
+      "quantity": 2,
+      "unit": "箱",
+      "batch_no": "DY20261010",
+      "supplier_name": "李记粮油",
+      "supplier_phone": "13700003333"
+    }
+  },
+  {
+    "id": "E05",
+    "note": "含糊表述不应被补全：说了「大概」不等于给了准确数量",
+    "dialogue": ["好像城南肉联厂送了大概三十斤左右猪肉，别的记不清了"],
+    "expect": {
+      "ingredient_name": "猪肉",
+      "supplier_name": "城南肉联厂",
+      "batch_no": null,
+      "certificate": null
+    }
+  },
+  {
+    "id": "E06",
+    "note": "日期用相对说法，应换算",
+    "dialogue": ["今天进货：鲜鸡蛋30斤，供货者永丰蛋业，地址永丰路12号，电话13600004444，生产日期昨天，保质期30天，检疫证明DJ-2026-77"],
+    "expect": {
+      "ingredient_name": "鲜鸡蛋",
+      "quantity": 30,
+      "unit": "斤",
+      "supplier_name": "永丰蛋业"
+    }
+  },
+  {
+    "id": "E07",
+    "note": "缺联系方式：法定项缺失，应当留空",
+    "dialogue": ["10月25日从城北水产批发了一箱带鱼，规格10kg一箱，批号SC20261024，生产日期10月24日，保质期冷冻12个月，供货者城北水产"],
+    "expect": {
+      "ingredient_name": "带鱼",
+      "quantity": 1,
+      "unit": "箱",
+      "supplier_name": "城北水产",
+      "supplier_phone": null
+    }
+  },
+  {
+    "id": "E08",
+    "note": "一句话里混了两种商品，只应抽第一条（本系统一行一个品项）",
+    "dialogue": ["今天进了20斤猪肉和30斤土豆，都是老张送的"],
+    "expect": {
+      "supplier_name": "老张",
+      "certificate": null
+    }
+  },
+  {
+    "id": "E09",
+    "note": "凭证编号带中文前缀，不应被改写",
+    "dialogue": ["城南肉联厂送来冷鲜猪肉15公斤，批号P20261027-1，生产日期2026-10-27，保质期冷藏3天，进货日期2026-10-27，地址城南大道88号，电话13800001111，动物检疫合格证明编号动检2026第0551号"],
+    "expect": {
+      "ingredient_name": "冷鲜猪肉",
+      "quantity": 15,
+      "unit": "公斤",
+      "batch_no": "P20261027-1",
+      "certificate": "动检2026第0551号"
+    }
+  },
+  {
+    "id": "E10",
+    "note": "「没有保质期」的散装货：不要编保质期",
+    "dialogue": ["从王记调料进了5袋散装花椒，没有保质期标识，生产日期2026年9月1日，电话13500006666，合格证KJ-2026-113"],
+    "expect": {
+      "ingredient_name": "花椒",
+      "quantity": 5,
+      "unit": "袋",
+      "shelf_life": null,
+      "supplier_phone": "13500006666"
+    }
+  },
+  {
+    "id": "E11",
+    "note": "只有电话号码没名字：不要把电话当供货者名称",
+    "dialogue": ["昨天收了20斤白菜，电话13800008888，没记住是谁家"],
+    "expect": {
+      "ingredient_name": "白菜",
+      "quantity": 20,
+      "unit": "斤",
+      "supplier_name": null,
+      "supplier_phone": "13800008888"
+    }
+  },
+  {
+    "id": "E12",
+    "note": "规格与数量都给了，不能混在一起",
+    "dialogue": ["永丰蛋业 10月26日送鲜鸡蛋 25斤，规格 30枚/盒，生产日期 10月25日，保质期 45天，批号 DJ20261025，电话 13600004444，检疫证明 DJ-2026-88"],
+    "expect": {
+      "ingredient_name": "鲜鸡蛋",
+      "spec": "30枚/盒",
+      "quantity": 25,
+      "unit": "斤",
+      "batch_no": "DJ20261025"
+    }
+  },
+  {
+    "id": "E13",
+    "note": "全空兜底：一句话里没有任何可抽的东西",
+    "dialogue": ["今天有点忙，晚点再说"],
+    "expect": {
+      "ingredient_name": null,
+      "quantity": null,
+      "supplier_name": null,
+      "certificate": null
+    }
+  },
+  {
+    "id": "E14",
+    "note": "金额陷阱：单价与总价不要搞错",
+    "dialogue": ["进了10箱纯牛奶，单价55元，一共550元，供货者光明乳业，电话400-820-1234，生产日期2026-10-20，批号MN20261020，保质期6个月，地址申江路1号"],
+    "expect": {
+      "ingredient_name": "纯牛奶",
+      "quantity": 10,
+      "unit": "箱",
+      "supplier_name": "光明乳业",
+      "supplier_phone": "400-820-1234"
+    }
+  },
+  {
+    "id": "E15",
+    "note": "否定句：说了「没要发票」不代表有凭证",
+    "dialogue": ["老李送了30斤黄瓜，这次没要发票，也没有合格证，电话13911112222"],
+    "expect": {
+      "ingredient_name": "黄瓜",
+      "quantity": 30,
+      "unit": "斤",
+      "supplier_name": "老李",
+      "certificate": null
+    }
+  },
+  {
+    "id": "E16",
+    "note": "多轮补充后信息完整（模拟真实对话的第二轮）",
+    "dialogue": [
+      "今天进了点冻虾",
+      "是城北水产送的，30斤，规格2kg一箱",
+      "批号SC20261022，生产日期10月22日，冷冻保质6个月，地址城北码头1号，电话13700009999，检验证明SC-2026-421"
+    ],
+    "expect": {
+      "ingredient_name": "冻虾",
+      "quantity": 30,
+      "unit": "斤",
+      "supplier_name": "城北水产",
+      "batch_no": "SC20261022",
+      "supplier_phone": "13700009999"
+    }
+  }
+]

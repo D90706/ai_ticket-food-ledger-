@@ -1,0 +1,63 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: ai-ticket
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ai_ticket?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${DB_USER:root}
+    # 口令不进仓库，必须用环境变量提供：
+    #   set DB_PASSWORD=你的口令        (Windows)
+    #   export DB_PASSWORD=你的口令      (bash)
+    # 留空会导致启动时连不上库——这是预期的，比把真实口令写进仓库安全。
+    password: ${DB_PASSWORD:}
+  jackson:
+    time-zone: Asia/Shanghai
+
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    # 开发期打 SQL，上线前改回 NoLoggingImpl 或去掉
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+app:
+  # DeepSeek：OpenAI 兼容协议，用 HttpClient 直接调用，不引入 LLM 框架
+  llm:
+    base-url: https://api.deepseek.com
+
+    # API key 不进仓库。本地调试二选一：
+    #   1 设环境变量（推荐）：set DEEPSEEK_API_KEY=sk-xxxxxxxx      (Windows)
+    #                        export DEEPSEEK_API_KEY=sk-xxxxxxxx    (bash)
+    #   2 临时把下面改成 ${DEEPSEEK_API_KEY:sk-xxxxxxxx}，提交前改回空
+    #
+    # 留空时模型调用会明确报错「未配置 app.llm.api-key」，不影响其它功能。
+    api-key: ${DEEPSEEK_API_KEY:}
+
+    model: deepseek-chat
+    timeout-seconds: 60
+
+  # 对话编排
+  chat:
+    # 最多追问几次。到上限仍缺必填，就走「待确认」或强制出单。
+    max-followups: 2
+
+    # 信息不全（追问超限）时，是否先让顾客确认再入队。
+    # 只对红级生效：绿黄信息够用，多一步就是打扰，也必然被无脑点过。
+    # 关掉 = 旧行为（追问超限直接出单），可用来现场对比两种流程。
+    confirm-before-ticket: true
+
+
+logging:
+  level:
+    com.example.ticket: DEBUG

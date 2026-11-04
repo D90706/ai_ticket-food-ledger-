@@ -1,0 +1,28 @@
+# ---------- 构建产物 ----------
+target/
+web/dist/
+web/node_modules/
+node_modules/
+
+# ---------- 上传的附件 ----------
+# 索证索票照片是业务数据，不进代码仓库
+uploads/
+
+# ---------- 日志 ----------
+*.log
+logs/
+
+# ---------- IDE ----------
+.idea/
+*.iml
+.vscode/
+
+# ---------- 系统 ----------
+.DS_Store
+Thumbs.db
+
+# ---------- 敏感信息 ----------
+# application.yml 里不放任何真实凭据，只有占位符：
+#   password: ${DB_PASSWORD:}
+#   api-key:  ${DEEPSEEK_API_KEY:}
+# 运行时用环境变量 DB_PASSWORD / DEEPSEEK_API_KEY 注入，不要写回文件。

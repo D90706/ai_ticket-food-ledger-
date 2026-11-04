@@ -1,0 +1,18 @@
+{
+  "values": {
+    "order_id": "2026100812345678",
+    "reason": "尺码不合适",
+    "worn": false,
+    "size_wanted": "S",
+    "evidence": null
+  },
+  "basis": {
+    "order_id": "订单号 2026100812345678",
+    "reason": "收到的M码太大了",
+    "worn": "也没穿过",
+    "size_wanted": "想换成S码",
+    "evidence": null
+  },
+  "suggestion": "批准换货",
+  "summary": "顾客收到的 M 码卫衣偏大，未试穿、吊牌未剪，希望换成 S 码。"
+}

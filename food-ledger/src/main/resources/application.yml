@@ -1,0 +1,64 @@
+server:
+  # 刻意不用 8080：仓库根目录那个旧的 AI 客服工程占着 8080，
+  # 两边都用 8080 的后果是「启动了新工程，实际连到的是旧工程」。
+  port: 8081
+
+spring:
+  application:
+    name: food-ledger
+  datasource:
+    url: jdbc:mysql://localhost:3306/food_ledger?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useSSL=false
+    username: ${DB_USER:root}
+    # 口令不进仓库，必须用环境变量提供：
+    #   set DB_PASSWORD=你的口令        (Windows)
+    #   export DB_PASSWORD=你的口令      (bash)
+    # 留空会导致启动时连不上库——这是预期的，比把真实口令写进仓库安全。
+    password: ${DB_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 12MB
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+
+app:
+  # 附件目录：不放在 src/main/resources 下，避免被打进 jar
+  upload-dir: ${UPLOAD_DIR:./uploads}
+
+  ledger:
+    # 临期预警默认天数，模板里可以各自覆盖
+    default-shelf-life-warn-days: 3
+    # 证照到期预警天数
+    license-warn-days: 30
+
+  entry:
+    # AI 录入时最多追问几次；到上限转「待确认」
+    max-followups: 2
+    confirm-before-record: true
+
+  llm:
+    base-url: ${DEEPSEEK_BASE_URL:https://api.deepseek.com}
+    model: deepseek-chat
+    timeout-seconds: 60
+    # API key 不进仓库。本地调试二选一：
+    #   1 设环境变量（推荐）：set DEEPSEEK_API_KEY=sk-xxxxxxxx
+    #   2 临时把下面改成 ${DEEPSEEK_API_KEY:sk-xxxxxxxx}，提交前改回空
+    # 留空时 AI 录入不可用并给出提示；手填录入不受影响。
+    api-key: ${DEEPSEEK_API_KEY:}
+
+  auth:
+    demo-password: ${DEMO_PASSWORD:123456}
+
+logging:
+  level:
+    com.example.ledger: DEBUG

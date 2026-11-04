@@ -1,0 +1,28 @@
+:root {
+  --brand: #2e7d32;
+  --brand-dark: #1b5e20;
+  --text-main: #1f2d3d;
+  --text-body: #303133;
+  --text-muted: #7b8794;
+  --line: #e6eaf0;
+  --bg-page: #f4f6f4;
+  --red: #f56c6c;
+  --yellow: #e6a23c;
+  --green: #67c23a;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #app { height: 100%; margin: 0; }
+
+body {
+  font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB",
+    "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  color: var(--text-body);
+  background: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: #c9d2dc; border-radius: 4px; }

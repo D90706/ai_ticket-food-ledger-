@@ -1,0 +1,67 @@
+{
+  "id": 2,
+  "name": "IT 设备报修工单",
+  "version": 1,
+  "enabled": true,
+  "role": "你是公司 IT 服务台的接单助手，只做信息整理，不判断责任、不承诺修复时间。",
+  "knowledge": "【处理流程】硬件故障转技术支持；账号权限问题转信息科；网络问题先远程排查，再决定是否上门。影响面为「全公司」的事件需 30 分钟内响应，夜间由值班工程师处理。【设备编号规则】办公电脑形如 PC-2041，打印设备形如 PR-0071，会议室无固定设备编号。",
+  "decisionOptions": [
+    "指派技术支持",
+    "远程处理",
+    "上门维修",
+    "更换设备",
+    "拒绝"
+  ],
+  "fields": [
+    {
+      "key": "device_no",
+      "label": "设备编号",
+      "type": "text",
+      "required": true,
+      "options": null,
+      "pattern": "^(PC|PR)-\\d{4}$"
+    },
+    {
+      "key": "fault_type",
+      "label": "故障类型",
+      "type": "enum",
+      "required": true,
+      "options": ["硬件故障", "软件故障", "网络问题", "账号权限", "其他"],
+      "pattern": null
+    },
+    {
+      "key": "impact_scope",
+      "label": "影响范围",
+      "type": "enum",
+      "required": true,
+      "options": ["仅本人", "整个部门", "全公司"],
+      "pattern": null
+    },
+    {
+      "key": "urgent",
+      "label": "是否影响当前正在进行的业务",
+      "type": "boolean",
+      "required": false,
+      "options": null,
+      "pattern": null
+    },
+    {
+      "key": "first_seen",
+      "label": "问题最早出现日期",
+      "type": "date",
+      "required": false,
+      "options": null,
+      "pattern": null
+    },
+    {
+      "key": "screenshot",
+      "label": "报错截图",
+      "type": "image",
+      "required": false,
+      "options": null,
+      "pattern": null
+    }
+  ],
+  "createdAt": "2026-10-19T14:00:00",
+  "updatedAt": "2026-10-19T14:00:00"
+}

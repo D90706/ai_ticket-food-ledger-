@@ -1,0 +1,58 @@
+{
+  "code": 0,
+  "message": "ok",
+  "data": {
+    "dialogue": "您好，我上周买的卫衣订单号 2026100812345678，收到的M码太大了，我平时穿S的，想换成S码。衣服吊牌还没剪，也没穿过。",
+    "values": {
+      "order_id": "2026100812345678",
+      "reason": "尺码不合适",
+      "worn": false,
+      "size_wanted": "S",
+      "evidence": null
+    },
+    "basis": {
+      "order_id": "订单号 2026100812345678",
+      "reason": "收到的M码太大了",
+      "worn": "也没穿过",
+      "size_wanted": "想换成S码",
+      "evidence": null
+    },
+    "suggestion": "批准换货",
+    "summary": "顾客收到的 M 码卫衣偏大，未试穿、吊牌未剪，希望换成 S 码。",
+    "quality": {
+      "level": "YELLOW",
+      "decision": {
+        "blocking": [],
+        "degrading": [
+          {
+            "code": "OPTIONAL_MISSING",
+            "field": "evidence",
+            "message": "缺 1 项选填：商品问题照片"
+          }
+        ],
+        "missingRequired": [],
+        "missingOptional": ["evidence"]
+      },
+      "faithfulness": {
+        "checkItems": [
+          { "field": "order_id", "hasBasis": true, "inDialogue": true },
+          { "field": "reason", "hasBasis": true, "inDialogue": true },
+          { "field": "worn", "hasBasis": true, "inDialogue": true },
+          { "field": "size_wanted", "hasBasis": true, "inDialogue": true }
+        ],
+        "coverage": 1.0
+      },
+      "consistency": {
+        "violations": [],
+        "advisories": []
+      },
+      "metrics": {
+        "fillRate": 0.8,
+        "requiredRate": 1.0,
+        "optionalCoverage": 0.667,
+        "basisCoverage": 1.0
+      },
+      "messages": ["缺 1 项选填：商品问题照片"]
+    }
+  }
+}

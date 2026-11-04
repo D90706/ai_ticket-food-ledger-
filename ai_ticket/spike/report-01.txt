@@ -1,0 +1,129 @@
+model_requested=deepseek-chat  model_returned=deepseek-flash
+
+====================================================================
+A1 [natural]  schema=cs_after_sale
+confidence=0.9  suggestion=批准换货
+missing_slots   =["evidence"]
+missing_REQUIRED=[]
+consistent=True enum_out=[] type_mismatch=[]
+values={"order_id": "20261008XXXX", "reason": "尺码不合适", "worn": false, "size_wanted": "S", "evidence": null}
+
+====================================================================
+A1 [jsonmode]  schema=cs_after_sale
+confidence=0.9  suggestion=批准换货
+missing_slots   =["evidence"]
+missing_REQUIRED=[]
+consistent=True enum_out=[] type_mismatch=[]
+values={"order_id": "20261008XXXX", "reason": "尺码不合适", "worn": false, "size_wanted": "S", "evidence": null}
+
+====================================================================
+A2 [natural]  schema=cs_after_sale
+confidence=0.2  suggestion=None
+missing_slots   =["order_id", "reason", "worn", "size_wanted", "evidence"]
+missing_REQUIRED=['order_id', 'reason']
+consistent=True enum_out=[] type_mismatch=[]
+values={"order_id": null, "reason": null, "worn": null, "size_wanted": null, "evidence": null}
+
+====================================================================
+A2 [jsonmode]  schema=cs_after_sale
+confidence=0.4  suggestion=None
+missing_slots   =["order_id", "worn", "size_wanted", "evidence"]
+missing_REQUIRED=['order_id']
+consistent=True enum_out=[] type_mismatch=[]
+values={"order_id": null, "reason": "质量问题", "worn": null, "size_wanted": null, "evidence": null}
+
+====================================================================
+A3 [natural]  schema=cs_after_sale
+confidence=0.55  suggestion=None
+missing_slots   =["worn", "size_wanted", "evidence"]
+missing_REQUIRED=[]
+consistent=True enum_out=[] type_mismatch=[]
+values={"order_id": "20261015ABC123", "reason": "质量问题", "worn": null, "size_wanted": null, "evidence": null}
+
+====================================================================
+A3 [jsonmode]  schema=cs_after_sale
+confidence=0.75  suggestion=要求补证
+missing_slots   =["worn", "size_wanted", "evidence"]
+missing_REQUIRED=[]
+consistent=True enum_out=[] type_mismatch=[]
+values={"order_id": "20261015ABC123", "reason": "质量问题", "worn": null, "size_wanted": null, "evidence": null}
+
+====================================================================
+A4 [natural]  schema=cs_after_sale
+confidence=0.55  suggestion=None
+missing_slots   =["worn", "evidence"]
+missing_REQUIRED=[]
+consistent=False enum_out=[] type_mismatch=[]
+values={"order_id": "20261001XYZ", "reason": "质量问题", "worn": null, "size_wanted": null, "evidence": null}
+
+====================================================================
+A4 [jsonmode]  schema=cs_after_sale
+confidence=0.55  suggestion=None
+missing_slots   =["worn", "size_wanted", "evidence"]
+missing_REQUIRED=[]
+consistent=True enum_out=[] type_mismatch=[]
+values={"order_id": "20261001XYZ", "reason": "质量问题", "worn": null, "size_wanted": null, "evidence": null}
+
+====================================================================
+B1 [natural]  schema=it_repair
+confidence=0.9  suggestion=指派技术支持
+missing_slots   =["screenshot"]
+missing_REQUIRED=[]
+consistent=True enum_out=[] type_mismatch=[]
+values={"device_no": "PC-2031", "fault_type": "硬件故障", "impact_scope": "整个部门", "urgent": true, "first_seen": "2026-10-20", "screenshot": null}
+
+====================================================================
+B1 [jsonmode]  schema=it_repair
+confidence=0.9  suggestion=指派技术支持
+missing_slots   =["screenshot"]
+missing_REQUIRED=[]
+consistent=True enum_out=[] type_mismatch=[]
+values={"device_no": "PC-2031", "fault_type": "硬件故障", "impact_scope": "整个部门", "urgent": true, "first_seen": "2026-10-20", "screenshot": null}
+
+====================================================================
+B2 [natural]  schema=it_repair
+confidence=0.7  suggestion=None
+missing_slots   =["device_no", "impact_scope", "urgent", "first_seen", "screenshot"]
+missing_REQUIRED=['device_no', 'impact_scope']
+consistent=True enum_out=[] type_mismatch=[]
+values={"device_no": null, "fault_type": "账号权限", "impact_scope": null, "urgent": null, "first_seen": null, "screenshot": null}
+
+====================================================================
+B2 [jsonmode]  schema=it_repair
+confidence=0.7  suggestion=None
+missing_slots   =["device_no", "impact_scope", "urgent", "first_seen", "screenshot"]
+missing_REQUIRED=['device_no', 'impact_scope']
+consistent=True enum_out=[] type_mismatch=[]
+values={"device_no": null, "fault_type": "账号权限", "impact_scope": null, "urgent": null, "first_seen": null, "screenshot": null}
+
+====================================================================
+B3 [natural]  schema=it_repair
+confidence=0.75  suggestion=远程处理
+missing_slots   =["device_no", "urgent", "screenshot"]
+missing_REQUIRED=['device_no']
+consistent=True enum_out=[] type_mismatch=[]
+values={"device_no": null, "fault_type": "网络问题", "impact_scope": "整个部门", "urgent": null, "first_seen": "2026-10-20", "screenshot": null}
+
+====================================================================
+B3 [jsonmode]  schema=it_repair
+confidence=0.75  suggestion=远程处理
+missing_slots   =["device_no", "urgent", "first_seen", "screenshot"]
+missing_REQUIRED=['device_no']
+consistent=True enum_out=[] type_mismatch=[]
+values={"device_no": null, "fault_type": "网络问题", "impact_scope": "整个部门", "urgent": null, "first_seen": null, "screenshot": null}
+
+====================================================================
+B4 [natural]  schema=it_repair
+confidence=0.55  suggestion=None
+missing_slots   =["device_no", "impact_scope", "urgent", "first_seen", "screenshot"]
+missing_REQUIRED=['device_no', 'impact_scope']
+consistent=True enum_out=[] type_mismatch=[]
+values={"device_no": null, "fault_type": "硬件故障", "impact_scope": null, "urgent": null, "first_seen": null, "screenshot": null}
+
+====================================================================
+B4 [jsonmode]  schema=it_repair
+confidence=0.5  suggestion=None
+missing_slots   =["device_no", "impact_scope", "urgent", "first_seen", "screenshot"]
+missing_REQUIRED=['device_no', 'impact_scope']
+consistent=True enum_out=[] type_mismatch=[]
+values={"device_no": null, "fault_type": "硬件故障", "impact_scope": null, "urgent": null, "first_seen": null, "screenshot": null}

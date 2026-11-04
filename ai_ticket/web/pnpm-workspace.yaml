@@ -1,0 +1,7 @@
+# pnpm 11 默认会拦截依赖的安装脚本，并且每次 run 前都做一次依赖校验，
+# 校验失败就拒绝执行。本项目不需要 esbuild / vue-demi 的安装脚本
+# （二进制由平台包提供），所以直接关掉这两道门。
+onlyBuiltDependencies:
+  - esbuild
+  - vue-demi
+verifyDepsBeforeRun: false

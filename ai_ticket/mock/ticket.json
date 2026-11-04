@@ -1,0 +1,174 @@
+[
+  {
+    "id": 101,
+    "templateId": 1,
+    "templateVersion": 3,
+    "schemaSnapshot": {
+      "version": 3,
+      "decisionOptions": ["批准换货", "批准退货", "拒绝", "要求补证", "转售后专岗"],
+      "fields": [
+        { "key": "order_id", "label": "订单号", "type": "text", "required": true, "options": null, "pattern": "^\\d{8,20}$" },
+        { "key": "reason", "label": "原因", "type": "enum", "required": true, "options": ["尺码不合适", "质量问题", "发错货", "其他"], "pattern": null },
+        { "key": "worn", "label": "是否已穿着或洗涤", "type": "boolean", "required": false, "options": null, "pattern": null },
+        { "key": "size_wanted", "label": "希望换成的尺码", "type": "text", "required": false, "options": null, "pattern": "^(XS|S|M|L|XL|XXL)$" },
+        { "key": "evidence", "label": "商品问题照片", "type": "image", "required": false, "options": null, "pattern": null }
+      ]
+    },
+    "valuesData": {
+      "order_id": "2026100812345678",
+      "reason": "尺码不合适",
+      "worn": false,
+      "size_wanted": "S",
+      "evidence": null
+    },
+    "basis": {
+      "order_id": "订单号 2026100812345678",
+      "reason": "收到的M码太大了",
+      "worn": "也没穿过",
+      "size_wanted": "想换成S码",
+      "evidence": null
+    },
+    "summary": "顾客收到的 M 码卫衣偏大，未试穿、吊牌未剪，希望换成 S 码。",
+    "suggestion": "批准换货",
+    "qualityLevel": "YELLOW",
+    "qualityDetail": {
+      "level": "YELLOW",
+      "decision": {
+        "blocking": [],
+        "degrading": [
+          {
+            "code": "OPTIONAL_MISSING",
+            "field": "evidence",
+            "message": "缺 1 项选填：商品问题照片"
+          }
+        ],
+        "missingRequired": [],
+        "missingOptional": ["evidence"]
+      },
+      "faithfulness": {
+        "checkItems": [
+          { "field": "order_id", "hasBasis": true, "inDialogue": true },
+          { "field": "reason", "hasBasis": true, "inDialogue": true },
+          { "field": "worn", "hasBasis": true, "inDialogue": true },
+          { "field": "size_wanted", "hasBasis": true, "inDialogue": true }
+        ],
+        "coverage": 1.0
+      },
+      "consistency": {
+        "violations": [],
+        "advisories": []
+      },
+      "metrics": {
+        "fillRate": 0.8,
+        "requiredRate": 1.0,
+        "optionalCoverage": 0.667,
+        "basisCoverage": 1.0
+      },
+      "messages": ["缺 1 项选填：商品问题照片"]
+    },
+    "status": "PENDING",
+    "assignee": null,
+    "decision": null,
+    "sessionId": 9001,
+    "needsClarify": false,
+    "decisionTimeMs": null,
+    "createdAt": "2026-10-20T09:41:12",
+    "decidedAt": null
+  },
+  {
+    "id": 102,
+    "templateId": 1,
+    "templateVersion": 3,
+    "schemaSnapshot": {
+      "version": 3,
+      "decisionOptions": ["批准换货", "批准退货", "拒绝", "要求补证", "转售后专岗"],
+      "fields": [
+        { "key": "order_id", "label": "订单号", "type": "text", "required": true, "options": null, "pattern": "^\\d{8,20}$" },
+        { "key": "reason", "label": "原因", "type": "enum", "required": true, "options": ["尺码不合适", "质量问题", "发错货", "其他"], "pattern": null },
+        { "key": "worn", "label": "是否已穿着或洗涤", "type": "boolean", "required": false, "options": null, "pattern": null },
+        { "key": "size_wanted", "label": "希望换成的尺码", "type": "text", "required": false, "options": null, "pattern": "^(XS|S|M|L|XL|XXL)$" },
+        { "key": "evidence", "label": "商品问题照片", "type": "image", "required": false, "options": null, "pattern": null }
+      ]
+    },
+    "valuesData": {
+      "order_id": null,
+      "reason": null,
+      "worn": null,
+      "size_wanted": null,
+      "evidence": null
+    },
+    "basis": {
+      "order_id": null,
+      "reason": null,
+      "worn": null,
+      "size_wanted": null,
+      "evidence": null
+    },
+    "summary": "顾客称购买的裤子有问题，要求退货，但未说明问题性质，也未提供订单号。",
+    "suggestion": null,
+    "qualityLevel": "RED",
+    "qualityDetail": {
+      "level": "RED",
+      "decision": {
+        "blocking": [
+          {
+            "code": "MISSING_REQUIRED",
+            "field": "order_id",
+            "message": "缺 1 项必填：订单号"
+          },
+          {
+            "code": "MISSING_REQUIRED",
+            "field": "reason",
+            "message": "缺 1 项必填：原因"
+          }
+        ],
+        "degrading": [
+          {
+            "code": "OPTIONAL_MISSING",
+            "field": "worn",
+            "message": "缺 1 项选填：是否已穿着或洗涤"
+          },
+          {
+            "code": "OPTIONAL_MISSING",
+            "field": "size_wanted",
+            "message": "缺 1 项选填：希望换成的尺码"
+          },
+          {
+            "code": "OPTIONAL_MISSING",
+            "field": "evidence",
+            "message": "缺 1 项选填：商品问题照片"
+          }
+        ],
+        "missingRequired": ["order_id", "reason"],
+        "missingOptional": ["worn", "size_wanted", "evidence"]
+      },
+      "faithfulness": {
+        "checkItems": [],
+        "coverage": 0.0
+      },
+      "consistency": {
+        "violations": [],
+        "advisories": []
+      },
+      "metrics": {
+        "fillRate": 0.0,
+        "requiredRate": 0.0,
+        "optionalCoverage": 0.0,
+        "basisCoverage": 0.0
+      },
+      "messages": [
+        "缺 2 项必填：订单号、原因",
+        "缺 3 项选填：是否已穿着或洗涤、希望换成的尺码、商品问题照片",
+        "追问已达上限，按「信息不全」出单，需人工补齐"
+      ]
+    },
+    "status": "INFO_INCOMPLETE",
+    "assignee": null,
+    "decision": null,
+    "sessionId": 9002,
+    "needsClarify": true,
+    "decisionTimeMs": null,
+    "createdAt": "2026-10-20T09:52:03",
+    "decidedAt": null
+  }
+]
